@@ -58,7 +58,6 @@ style: |
 |------|---------|---------|
 | **方案一** | select/poll/ppoll/pselect6 + sys_msync | 43个测试模块, SQLite跑通 |
 | **方案二** | 子课题3：eBPF内核可观测性 | kprobe, eBPF全栈, LKM, JIT |
-| **方案三** | 后续计划 | 移动机器人sg2002/rk3588 |
 
 ---
 
