@@ -89,7 +89,7 @@ style: |
 
 ## 3. 主线一：kprobe/kretprobe 动态探针
 
-### 核心实现（`kprobe.rs`, 639行）
+### 核心实现（`kprobe.rs`, 535行）
 
 - 4架构 `trapframe_to_ptregs()` / `ptregs_write_back()`
   - x86_64 / RISC-V 64 / AArch64 / LoongArch
@@ -99,7 +99,7 @@ style: |
 ### AArch64 SP修复（#887）
 
 ```rust
-// components/axcpu/src/arch/aarch64/trap.rs
+// components/axcpu/src/aarch64/context.rs + trap.S
 // 修复异常返回时 SP 指针未正确保存的严重 Bug
 ```
 
