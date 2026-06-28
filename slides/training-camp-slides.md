@@ -74,7 +74,7 @@ style: |
 │                eBPF 运行时层                       │
 │  ┌──────────┐ ┌───────────┐ ┌────────────┐       │
 │  │ eBPF VM  │ │ Map Mgr   │ │ Verifier   │       │
-│  │ 22 helpers│ │ 7种Map   │ │ 程序验证   │       │
+│  │ helpers  │ │ 多Map类型│ │ 程序验证   │       │
 │  └──────────┘ └───────────┘ └────────────┘       │
 ├──────────────────────────────────────────────────┤
 │             数据通道 & 事件源层                    │
@@ -124,11 +124,11 @@ style: |
 
 | 文件 | 行数 | 功能 |
 |------|------|------|
-| `ebpf/mod.rs` | 178 | 系统调用入口 |
+| `ebpf/mod.rs` | 174 | 系统调用入口 |
 | `ebpf/transform.rs` | 302 | 内核桥接层 |
-| `ebpf/map.rs` | 154 | Map管理 |
-| `perf/bpf.rs` | 330 | 运行时引擎 + ringbuf |
-| `perf/mod.rs` | 253 | perf_event_open调度 |
+| `ebpf/map.rs` | 158 | Map管理 |
+| `perf/bpf.rs` | 361 | 运行时引擎 + ringbuf |
+| `perf/mod.rs` | 312 | perf_event_open调度 |
 
 ---
 
@@ -139,7 +139,7 @@ style: |
 | 类型 | 状态 | 代码位置 |
 |------|:----:|---------|
 | `PERF_TYPE_KPROBE` | ✅ | `perf/kprobe.rs` (208行) |
-| `PERF_TYPE_SOFTWARE` | ✅ | `perf/bpf.rs` (330行) |
+| `PERF_TYPE_SOFTWARE` | ✅ | `perf/bpf.rs` (361行) |
 | `PERF_TYPE_TRACEPOINT` | ✅ | `perf/tracepoint.rs` (160行) |
 | `PERF_TYPE_UPROBE` | ✅ | `perf/uprobe.rs` (92行) |
 
@@ -159,7 +159,7 @@ fn read(&self, dst: &mut IoDst) -> AxResult<usize> {
 
 ## 5. 主线三：LKM内核模块（#849）
 
-### 核心实现（`kmod/mod.rs`, 265行）
+### 核心实现（`kmod/mod.rs`, 332行）
 
 ```
 init_module()           delete_module()
@@ -198,7 +198,7 @@ eBPF 字节码
                     fallback → 解释器
 ```
 
-### 代码量
+### 代码量（`feat/ebpf-jit-*` 分支，待合入）
 
 | 文件 | 行数 |
 |------|------|
@@ -267,7 +267,7 @@ eBPF 字节码
 
 | 维度 | 数据 |
 |------|------|
-| Commits | **364** |
+| Commits | **378** |
 | 新增代码行数 | **15000+** |
 | 架构覆盖 | **4** (x86_64, RISC-V 64, AArch64, LoongArch) |
 | JIT 代码量 | **3317** 行（3架构） |
